@@ -1,13 +1,16 @@
 import cv2
 import numpy as np
 
-# cap = cv2.VideoCapture('video2.mp4')q
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture('video3.mp4')
+# cap = cv2.VideoCapture(1)
 
 net = cv2.dnn.readNetFromONNX("best.onnx")
 file = open("classes.txt","r")
 classes = file.read().split('\n')
 print(classes)
+
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter('out.avi',fourcc,30,(600,400))
 
 i = 0
 
@@ -58,12 +61,15 @@ while True:
         conf = confidences[i]
         text = label + "{:.2f}".format(conf)
         cv2.rectangle(img,(x1,y1),(x1+w,y1+h),(255,0,0),2)
-        cv2.putText(img, text, (x1,y1-2),cv2.FONT_HERSHEY_COMPLEX, 0.7,(255,0,255),2)
+        cv2.putText(img, text, (x1,y1-2),cv2.FONT_HERSHEY_DUPLEX, 0.7,(0,255,0),2)
         print(label)
+
         if label == 'Fall-Detected': 
             cv2.imwrite(f'falldetected{i}.jpg',img)
 
-    cv2.imshow('video',img)
+        out.write(img) # Saving the video
+
+    cv2.imshow('Fall detection',img)
     k = cv2.waitKey(10)
     if k == ord('q'):
         break
