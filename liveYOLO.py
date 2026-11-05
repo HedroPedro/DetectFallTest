@@ -9,7 +9,7 @@ file = open("classes.txt","r")
 classes = file.read().split('\n')
 print(classes)
 
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
+#fourcc = cv2.VideoWriter_fourcc(*'XVID')
 #out = cv2.VideoWriter('out.avi',fourcc,30,(600,400))
 
 i = 0
