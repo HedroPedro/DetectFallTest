@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 
-cap = cv2.VideoCapture('video3.mp4')
-# cap = cv2.VideoCapture(1)
+#cap = cv2.VideoCapture('video3.mp4')
+cap = cv2.VideoCapture(1)
 
 net = cv2.dnn.readNetFromONNX("best.onnx")
 file = open("classes.txt","r")
@@ -10,7 +10,7 @@ classes = file.read().split('\n')
 print(classes)
 
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('out.avi',fourcc,30,(600,400))
+#out = cv2.VideoWriter('out.avi',fourcc,30,(600,400))
 
 i = 0
 
@@ -67,7 +67,7 @@ while True:
         if label == 'Fall-Detected': 
             cv2.imwrite(f'falldetected{i}.jpg',img)
 
-        out.write(img) # Saving the video
+        #out.write(img) # Saving the video
 
     cv2.imshow('Fall detection',img)
     k = cv2.waitKey(10)
